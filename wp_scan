@@ -1,0 +1,15 @@
+#! /bin/sh
+# log files path
+
+date_time=`date +%Y%m%d_%H:%M`
+LOG_FILE="/var/log/wpscan/dailyscan_${date_time}"
+PDF_FILE="/var/log/test/wpscan_${date_time}.pdf"
+
+
+ruby /root/wpscan/bin/wpscan --url >> $LOG_FILE
+
+
+
+
+ENS= `enscript -p $LOG_FILE.ps $LOG_FILE`
+ps2pdf $LOG_FILE.ps $PDF_FILE
